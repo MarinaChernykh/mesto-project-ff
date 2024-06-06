@@ -85,13 +85,8 @@ profileEditButton.addEventListener('click', openEditProfilePopup);
 profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 newCardButton.addEventListener('click', openNewCardPopup);
 newCardFormElement.addEventListener('submit', handleNewCardFormSubmit);
-placesList.addEventListener('click', zoomInImage);
 
-
-
-
-
-
-
-
-
+// Добавление плавности появления попапов
+document.querySelectorAll('.popup').forEach((elem) => {
+  elem.classList.add('popup_is-animated');
+});
