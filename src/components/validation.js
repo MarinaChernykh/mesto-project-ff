@@ -67,5 +67,6 @@ export function clearValidation(formElement, config) {
     hideInputError(formElement, inputElement, config);
   });
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
+  formElement.reset();
   toggleButtonState(inputList, buttonElement, config);
 };

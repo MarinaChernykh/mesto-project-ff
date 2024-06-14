@@ -38,31 +38,19 @@ export function deleteCard(evt) {
   const cardElement = eventTarget.closest('.card');
   const confPopup = document.querySelector('.popup_type_confirm');
   confPopup.setAttribute('cardId', cardElement.getAttribute('id'));
-  openPopup(document.querySelector('.popup_type_confirm'));
+  openPopup(confPopup);
 }
 
 // Добавление/ удаление лайков
 export function likeCard(evt) {
   const cardElement = evt.target.closest('.card');
-  if (Array.from(evt.target.classList).includes('card__like-button_is-active')) {
-    removeLike(cardElement.getAttribute('id'))
-    .then((result) => {
-      countLikes(cardElement, result);
-      evt.target.classList.toggle('card__like-button_is-active');
-    })
-    .catch((err) => {
-      console.log(`Ошибка ${err}`);
-    });
-  } else {
-    addLike(cardElement.getAttribute('id'))
-    .then((result) => {
-      countLikes(cardElement, result);
-      evt.target.classList.toggle('card__like-button_is-active');
-    })
-    .catch((err) => {
-      console.log(`Ошибка ${err}`);
-    });
-  }
+  const likeMethod = evt.target.classList.contains('card__like-button_is-active') ? removeLike : addLike;
+  likeMethod(cardElement.getAttribute('id')) 
+  .then((result) => { 
+     countLikes(cardElement, result); 
+     evt.target.classList.toggle('card__like-button_is-active'); 
+})
+.catch(err => console.log(`Ошибка ${err}`));
 }
 
 // Отрисовка кол-ва лайков у карточки
@@ -73,10 +61,5 @@ function countLikes(cardElement, cardData) {
 
 // Проверка, ставил ли текущий пользователь лайк этой карточке
 function isLikedByCurrentUser(card, userId) {
-  for (const like of card.likes) {
-    if (like._id === userId) {
-      return true;
-    }
-  }
-  return false;
+  return card.likes.some(like => like._id === userId)
 }

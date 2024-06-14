@@ -54,10 +54,10 @@ const validationConfig = {
 
 // Попап изменения профиля пользователя - открытие
 function openEditProfilePopup() {
-  nameInput.value = profileTitle.textContent;
-  jobInput.value = profileDescription.textContent;
   openPopup(profilePopup);
   clearValidation(profileFormElement, validationConfig);
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = profileDescription.textContent;
 }
 
 // Попап изменения профиля пользователя - обработка сохранения формы
@@ -202,9 +202,5 @@ document.querySelectorAll('.popup').forEach((elem) => {
 // Изменение текста кнопки в процессе сохранения данных из формы
 function renderSaving(isSaving, formElement) {
   const formButton = formElement.querySelector('.button');
-  if (isSaving) {
-    formButton.textContent = 'Сохранение...';
-  } else {
-    formButton.textContent = 'Сохранить';
-  }
+  formButton.textContent = isSaving ? 'Сохранение...' : 'Сохранить';
 }
