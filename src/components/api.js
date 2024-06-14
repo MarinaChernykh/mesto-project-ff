@@ -86,3 +86,4 @@ export const updateAvatar = (avatar) => {
   })
   .then(checkResponseStatus);
 }
+
